@@ -1,6 +1,6 @@
 # SPEC 01 — MVP jugable de Arkanoid
 
-> **Estado:** Aprobado
+> **Estado:** Implementado
 > **Depende de:** (ninguno)
 > **Fecha:** 2026-08-26
 > **Objetivo:** Un juego de Arkanoid jugable de principio a fin en el navegador, con paleta, pelota, una grilla fija de ladrillos, colisiones básicas y victoria/derrota que vuelven directo a la pantalla de inicio.
@@ -73,15 +73,15 @@ Convenciones:
 
 ## Acceptance criteria
 
-- [ ] Al abrir `index.html` en el navegador, se ve la pantalla de inicio sin errores en la consola.
-- [ ] Presionar cualquier tecla desde la pantalla de inicio arranca la partida con paleta, pelota y 60 ladrillos.
-- [ ] Las flechas ← → mueven la paleta sin que salga del canvas.
-- [ ] La pelota rebota (reflexión especular) contra paredes, paleta y ladrillos.
-- [ ] Golpear un ladrillo lo destruye y suma puntaje al marcador visible.
-- [ ] Perder la pelota resta una vida y la relanza automáticamente.
-- [ ] Perder la 3ra vida vuelve directo a la pantalla de inicio.
-- [ ] Romper los 60 ladrillos vuelve directo a la pantalla de inicio.
-- [ ] Recargar la página siempre arranca desde cero (sin persistencia entre sesiones).
+- [x] Al abrir `index.html` en el navegador, se ve la pantalla de inicio sin errores en la consola.
+- [x] Presionar cualquier tecla desde la pantalla de inicio arranca la partida con paleta, pelota y 60 ladrillos.
+- [x] Las flechas ← → mueven la paleta sin que salga del canvas.
+- [x] La pelota rebota (reflexión especular) contra paredes, paleta y ladrillos.
+- [x] Golpear un ladrillo lo destruye y suma puntaje al marcador visible.
+- [x] Perder la pelota resta una vida y la relanza automáticamente.
+- [x] Perder la 3ra vida vuelve directo a la pantalla de inicio.
+- [x] Romper los 60 ladrillos vuelve directo a la pantalla de inicio.
+- [x] Recargar la página siempre arranca desde cero (sin persistencia entre sesiones).
 
 ## Decisions
 

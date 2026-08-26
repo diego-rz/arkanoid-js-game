@@ -12,11 +12,22 @@ This is a **pre-code bootstrap** for an Arkanoid/Breakout-style game (per `READM
 
 - **Target stack is decided but unbuilt**: plain HTML, CSS, and JavaScript, with **no dependencies**, playable in the browser. No framework, no bundler, no package manager expected.
 - There is no source code yet — no `package.json`, no build tooling, no game logic. The project has not been scaffolded.
-- This directory is **not yet a git repository**. `/spec-impl` (see below) creates branches, so `git init` (with the user's confirmation) will be needed before that skill can run.
-- `assets/spritesheet-breakout.png` is the only game asset present so far.
-- There is no `specs/` folder yet — it gets created the first time `/spec` saves a spec file.
+- Git is initialized, tracking `origin` at `github.com/diego-rz/arkanoid-js-game`, branch `main`.
+- `assets/spritesheet-breakout.png` is the only game asset present so far (bricks in 6 colors, paddle segments, ball — credited to Petraheim in the sheet itself).
+- `specs/01-mvp-arkanoid.md` exists in **`Borrador` (Draft)** state — it is not yet approved, so `/spec-impl` will refuse to implement it until a human flips its status to `Aprobado`. See **Planned architecture** below for what it defines.
 
-Because no code exists yet, there are no build/lint/test commands to run. Given the "no dependencies" constraint, expect development to stay commandless (open `index.html` directly or serve statically) rather than growing an npm toolchain — don't introduce a build step or package manager unless a spec explicitly calls for it. **The first real task in this repo will be running `/spec` to define the MVP.** Once code exists, this file should be updated with actual run/test commands and architecture notes.
+Because no code exists yet, there are no build/lint/test commands to run. Given the "no dependencies" constraint, expect development to stay commandless (open `index.html` directly or serve statically) rather than growing an npm toolchain — don't introduce a build step or package manager unless a spec explicitly calls for it. Once code exists, this file should be updated with actual run/test commands and any architecture that diverges from the plan below.
+
+## Planned architecture (per `specs/01-mvp-arkanoid.md`)
+
+This is what SPEC 01 commits to building — not yet implemented, but the contract for the next `/spec-impl` run:
+
+- Three files at the repo root: `index.html`, `style.css`, `script.js`. Canvas 2D API, fixed 800x600 canvas, no responsive design.
+- Single global state object: `{ screen: 'start'|'playing', score, lives, paddle: {x,y,width,height,speed}, ball: {x,y,dx,dy,radius}, bricks: [{x,y,width,height,color,alive}] }`.
+- Brick grid is fixed: 6 rows (one per spritesheet color) x 10 columns = 60 bricks, single hit each, uniform score value.
+- Paddle: ← → keyboard only. Ball: constant speed, simple mirror-reflection bounce (no angle-by-impact-point physics), auto-serves on start and after each life lost.
+- 3 lives; losing all 3 or clearing all 60 bricks both return straight to the `start` screen (score/lives/bricks reset) — no separate Game Over/Victory screens.
+- Explicitly out of scope for this spec: power-ups, sound, pause, persistence/high-scores, multiple levels, per-color scoring, mouse/touch controls, multi-hit bricks.
 
 ## Spec-driven workflow
 
@@ -24,10 +35,10 @@ This repo uses a two-command spec-driven development process (installed as skill
 
 ### `/spec <description>` — design a spec
 
-- Interviews the user in question blocks (never skips clarification) and writes the result to `specs/NN-slug.md`, numbered sequentially.
-- New specs start in `Draft` state. Only a human promotes a spec to `Approved`.
+- Interviews the user in question blocks (never skips clarification) and writes the result to `specs/NN-slug.md`, numbered sequentially (next one is `02-`).
+- New specs start in `Draft` state (`Borrador` in this repo — see Language note above). Only a human promotes a spec to `Approved`/`Aprobado`.
 - Full section structure and rules live in `.agents/skills/spec/template.md` — read it before authoring or editing a spec by hand.
-- On first use, seeds `specs/.spec-config.yml` with `AutoCreateBranch: true`.
+- `specs/.spec-config.yml` already exists with `AutoCreateBranch: true` — leave it untouched unless the user asks to change it.
 
 ### `/spec-impl <NN-slug>` — implement an approved spec
 
